@@ -1,0 +1,48 @@
+REFERENCES
+
+1. Espressif Systems. ESP32 Technical Documentation — GPIO & RTC GPIO. Espressif Systems. Available at:
+https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/gpio.html
+Accessed September 2026.
+
+Used for understanding ESP32 GPIO configuration, digital HIGH/LOW states, GPIO output behaviour, and GPIO limitations.
+
+2. Espressif Systems. ESP32 Hardware Design Guidelines — Schematic Checklist. Espressif Systems. Available at:
+https://docs.espressif.com/projects/esp-hardware-design-guidelines/en/latest/esp32/schematic-checklist.html
+Accessed September 2026.
+
+Used for understanding the electrical considerations and limitations associated with ESP32 GPIO connections.
+
+3. Espressif Systems. ESP-FAQ — Hardware Design. Espressif Systems. Available at:
+https://docs.espressif.com/projects/esp-faq/en/latest/hardware-related/hardware-design.html
+Accessed September 2026.
+
+Used as a reference while studying ESP32 GPIO voltage limits and electrical characteristics.
+
+4. Songle. SRD-05VDC-SL-C Relay Datasheet and Specifications. Available at:
+https://jlcpcb.com/partdetail/SRD-05VDC-SL-C/C35449
+Accessed September 2026.
+
+Used for understanding the 5 V relay coil requirements and relay operating characteristics relevant to the output-selection circuit.
+
+5. Tower Pro. SG90 Analog Servo — Specifications. Tower Pro. Available at:
+https://towerpro.com.tw/product/sg90-analog/
+Accessed September 2026.
+
+Used as a reference for the physical dimensions and specifications of the SG90 servo while designing the initial automated enclosure and door mechanism.
+
+6. Prof. DR. GVV Sharma. Progress Log / Project Documentation. Prof. Dr. GVV Sharma's course/project repository, 2026.
+https://github.com/gadepall/signal-processing/blob/main/ee3900-assignments/charger_lab/
+
+Used as the initial reference for the 7805-based charger circuit and the original project requirements. The repository URL can be added here if required for the final submission.
+
+7. OpenAI. ChatGPT. Available at:
+https://chatgpt.com/
+Accessed September 2026.
+
+Used as a supplementary learning and development tool for understanding ESP32 concepts such as active-high and active-low logic, GPIO behaviour, relay-control logic, and for generating and refining code during the project.
+
+8. OpenAI. ChatGPT. Available at:
+https://chatgpt.com/
+Accessed September 2026.
+
+Used as a learning tool for openscad, supplementary design and programming aid during the development of the initial automated enclosure, including assistance with OpenSCAD code generation and iterative mechanical design.

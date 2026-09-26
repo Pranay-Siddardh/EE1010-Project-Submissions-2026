@@ -1,0 +1,468 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{graphicx}
+\usepackage{hyperref}
+%\renewcommand{\theHpage}{\arabic{page}}
+\renewcommand{\theHfigure}{\theHsection.\arabic{figure}}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{lmodern}
+\usepackage{float} % Required for strict [H] image placement
+
+\geometry{a4paper, margin=1in}
+\numberwithin{figure}{section}
+
+% Sets the default font family to Sans-Serif (Modern Sans)
+\renewcommand{\familydefault}{\sfdefault}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\begin{document}
+
+% ==================== FIRST PAGE ====================
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    {\Huge \bfseries Progress Log \par}
+    \vspace{1.5cm}
+    {\Large \textbf{Made by:}\\[0.5em]
+    Nehan Mohammad\\[0.3em]
+    T. Pranay Siddarth Reddy\\[0.3em]
+    Akshit\par}
+    \vspace{2cm}
+    {\large \textbf{Assigned by:} Prof. Dr. GVV Sharma\par}
+    \vfill
+\end{titlepage}
+
+\newpage
+
+% ==================== SECOND PAGE ====================
+\section*{Acknowledgment}
+\addcontentsline{toc}{section}{Acknowledgment}
+We would like to express our sincere gratitude to our instructor GVV Sharma for assigning this project and guiding us through its practical implementation. We are also immensely thankful to our Teaching Assistants—\textbf{Subhodeep}, \textbf{Vivek}, and \textbf{Jnanesh}—for their continuous support, valuable feedback, and technical assistance during the lab sessions. Their insights were instrumental in helping us troubleshoot circuit issues and successfully complete this project.
+
+\vspace{2cm}
+\noindent
+\textbf{Authors:} \\
+Nehan Mohammad \\
+T. Pranay Siddarth Reddy \\
+Akshit
+
+\newpage
+
+% ==================== THIRD PAGE ====================
+\tableofcontents
+\newpage
+
+% ==================== FOURTH PAGE ONWARDS ====================
+\section{Progress Log: Core Circuit Implementation}
+
+\subsection{Component Collection and Initial Hardware Prep}
+The initial phase involved gathering all necessary hardware components for the 5V charger circuit. A notable early challenge was addressing loose or tricky terminal connections on the center-tapped 12-0-12 step-down transformer, which required careful re-soldering to ensure a stable electrical connection.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figs/components.jpeg}
+    \caption{Core-circuit design schematic.}
+    \label{fig:components}
+\end{figure}
+
+
+\subsection{Circuit Understanding and Mapping}
+Before soldering, the circuit topology was mapped out based on the baseline schematic. The design is systematically divided into two main functional parts:
+Step-down transformation using the transformer 
+diode rectification using a full-bridge configuration.
+Capacitive low-pass filtering and 5V regulation via the 7805 IC.
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figs/Corecircuit.jpeg}
+    \caption{Core-circuit design schematic.}
+    \label{fig:core_circuit}
+\end{figure}
+
+We started working on the power supply section by following the circuit given in the manual. The first stage was the step-down transformer, where the 220 V AC supply was reduced to approximately 12 V AC. We then implemented the full-wave bridge rectifier using four diodes and tested the circuit in simulation. At this stage, We observed that the output had become unidirectional, but it was still pulsating significantly between the peaks and troughs of the waveform.
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figs/rectifier+ve.jpeg}
+        \caption{Rectifier: Positive half-cycle.}
+        \label{fig:rectifier_pos}
+    \end{minipage}\hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figs/rectifier-vs.jpeg}
+        \caption{Rectifier: Negative half-cycle.}
+        \label{fig:rectifier_neg}
+    \end{minipage}
+\end{figure}
+
+As specified in the manual, we then added the filter capacitor across the rectifier output. We tested the circuit again in the simulation and compared the waveform with the previous result. This time, the voltage no longer dropped sharply between successive peaks; instead, the capacitor discharged gradually between the peaks, reducing the ripple in the output. This helped us understand the capacitor's function as a low-pass filter in the circuit rather than simply treating it as another component required by the circuit diagram.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figs/filter.jpeg}
+    \caption{Simulation of the bridge rectifier and capacitive low-pass filter stage with oscilloscope waveform view.}
+    \label{fig:simulation_filter}
+\end{figure}
+
+We then implemented the 7805 voltage regulator as the final stage. The output remained close to the expected 5 V even though the voltage entering the regulator was higher and contained some remaining variation. This helped us understand the purpose of the regulator as the stage responsible for providing a stable supply to the digital circuitry.
+
+Through the simulation and testing, We was able to follow the complete conversion process from 220 V AC to 12 V AC, then to pulsating DC, filtered DC, and finally regulated 5 V DC. More importantly, comparing the waveform after each stage helped us understand what each component was actually doing rather than only following the circuit given in the manual.
+
+\subsection{Perfboard Layout Planning}
+After deciding the circuit layout, we planned where each component would go on the perfboard. We tried to keep the connections as short as possible. This made the wiring cleaner and helped reduce unwanted noise and resistance.
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figs/pcblayout.jpeg}
+    \caption{Initial layout.}
+    \label{fig:layout}
+\end{figure}
+
+\subsection{Step-by-Step Component Soldering}
+Soldering was executed systematically across the core stages:
+\begin{itemize}
+    \item \textbf{Diode Rectification:} Assembling the four Si diodes in a bridge configuration to convert the AC sinusoid into a rectified output.
+    \item \textbf{Capacitive Filter:} Integrating the capacitor to act as an analog low-pass filter, smoothing out harmonic ripples.
+    \item \textbf{Regulation Stage:} Connecting the 7805 voltage regulator IC to lock the output down to a steady 5V DC supply.
+
+    
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.85\textwidth]{figs/pcbwirefront.png}
+        \caption{Finished Front view.}
+        \label{fig:front_view}
+    \end{figure}
+    
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.85\textwidth]{figs/pcbwireback.png}
+        \caption{Finished back view}
+        \label{fig:bakc_view}
+    \end{figure}
+    
+    
+
+\end{itemize}
+
+\subsection{Testing and USB Integration}
+To prevent compounding errors for subsequent steps, each soldered section was tested iteratively. Once the final regulated output was confirmed, the circuit was wired to a reliable USB port interface to give it practical utility for device charging.
+
+\subsection{Adjustments and Verification}
+We also tested a few different capacitor values to see how they affected the stability of the DC output. For each value, we observed the output waveform on the oscilloscope and compared the amount of ripple present. We recorded the measurements at different stages of the circuit so that we could compare how the waveform changed after the rectifier, filter, and regulator.
+
+\begin{itemize}
+    \item Transformer output AC waveform verification ($18\text{ V}$ peak).
+    \item Rectifier and filter stage DC component tracking.
+    \item Final regulator output check yielding $5\text{ V}$ with a minimal ripple of $\approx 5\text{ mV}$.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figs/acmeter.png}
+    \caption{Transformer output voltage.}
+    \label{fig:acmeter}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figs/dcmeter.png}
+    \caption{Circuit output voltage.}
+    \label{fig:dcmeter}
+\end{figure}
+
+
+\newpage
+
+
+\section{Project to Product}
+
+\subsection{Initial Concept: Automated Door Mechanism}
+
+Our initial idea was to develop a charger enclosure with a fully automated opening and closing mechanism for a compartment containing the USB charging cable. The aim was to make the charger more convenient to use by allowing the user to access the cable without manually opening the enclosure.
+
+We initially planned to use a servo motor along with its corresponding driver for the opening and closing mechanism. However, since only the driver was available and the required servo motor was not, we modified our approach and decided to use a dual-shaft BO motor instead. We then began designing the mechanical arrangement around the available motor.
+
+\begin{itemize}
+    \item \textbf{Design and Implementation:} We designed the enclosure with multiple compartments, hinges, lids, grooves, pulleys, and a mechanism to transfer the motor's motion to the opening lid. We also planned a separate openable panel to provide access to the internal electronics, including the PCB, ESP boards, and transformer. The enclosure was modelled in OpenSCAD, with AI-assisted code generation helping us define the required geometries and structural features.
+
+    \item \textbf{Challenges Encountered:} As the design became more detailed, we realised that the mechanical constraints, number of moving parts, and assembly requirements made the enclosure considerably more complicated than we had initially expected. The estimated construction and assembly time exceeded 80 hours, making it difficult to complete within the available project timeline.
+
+    \item \textbf{Outcome:} After evaluating the complexity and feasibility of the design, we decided to abandon the initial enclosure and restart the project with a simpler approach. Although we did not proceed with the automated door mechanism, the exercise helped us understand the importance of considering mechanical feasibility, component availability, and construction time alongside the circuit design.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{fig2.1.1.jpeg}
+    \caption{Initial 3D model of the automated enclosure.}
+    \label{fig:initial_enclosure}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{fig2.1.2.jpeg}
+    \caption{Initial 3D model of the automated enclosure.}
+    \label{fig:initial_enclosure}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{fig2.2.jpeg}
+    \caption{Separate 3D models of the lids and mechanical components.}
+    \label{fig:initial_lids}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{fig2.3.jpeg}
+    \caption{Initial circuit schematic.}
+    \label{fig:initial_circuit}
+\end{figure}
+
+
+\subsection{Second Attempt: Basic Charger Circuit and PCB Development}
+
+After abandoning the initial design, we decided to focus on getting the basic charger circuit working reliably before adding any additional features. This allowed us to separate the electrical development from the mechanical design and identify problems in the power supply at an early stage.
+
+\begin{itemize}
+    \item \textbf{Circuit Design and Implementation:} We began by implementing the basic AC-to-DC conversion circuit using a step-down transformer, a diode bridge rectifier, a filter capacitor, and a 7805 voltage regulator IC. The rectifier converted the transformer's AC output into pulsating DC, while the capacitor reduced the ripple and the 7805 provided a regulated 5 V output.
+
+    \item \textbf{PCB Layout and Component Placement:} We had to reserve space on the PCB for the additional components that we planned to integrate later. This meant fitting the rectifier diodes, filter capacitor, and voltage regulator into a relatively limited area while keeping the connections accessible. We planned the component placement and wiring together, trying to keep the circuit compact without making the connections difficult to work with.
+
+    \item \textbf{Testing and Challenges:} During the testing of the circuit, we encountered problems caused by accidental short circuits. Unfortunately, two capacitors were damaged during these tests. We had to replace them and recheck the connections before proceeding. With the third capacitor, we finally obtained a working circuit with fewer dangling connections and a more organised layout.
+
+    \item \textbf{Outcome:} This iteration gave us a functional starting point for further development. We also understood the importance of checking component polarity, inspecting connections, and testing the circuit carefully before proceeding with additional modifications.
+\end{itemize}
+
+%\begin{figure}[H]
+%    \centering
+%    \includegraphics[width=0.8\textwidth]{fig2.jpg}
+%    \caption{Schematic of the second charger circuit%.}
+%    \label{fig:second_circuit}
+%\end{figure}
+
+
+\subsection{Addition of an LED Indicator and Touch-Based Switching}
+
+Once we had a working basic charger circuit, we considered adding a simple LED indicator that would light up whenever the charger was connected to the supply. We then decided to extend this feature so that the LED could be switched ON and OFF by the user, even while the charger remained connected to the power source.
+
+\begin{itemize}
+    \item \textbf{Initial Concept:} We planned to use three additional components: a touch sensor, an LED, and a relay. The touch sensor would serve as the user input, while the relay would control the electrical connection to the LED. This would allow the user to toggle the LED without unplugging the charger.
+
+    \item \textbf{Microcontroller Selection:} We initially considered using an ESP32 to control these components. However, since the proposed feature required relatively little space and simple control logic, we decided to switch to an ESP-01S module. This helped us reduce the space required for the control section and move towards a more compact design.
+
+    \item \textbf{Circuit Integration:} We integrated the touch sensor, LED, relay, and ESP-01S into the existing circuit design. The microcontroller was intended to read the touch input and control the relay accordingly. We also considered how the additional connections would fit within the space already reserved on the PCB.
+
+    \item \textbf{Outcome:} This iteration introduced the idea of user-controlled output switching into our project. Instead of limiting the charger to a fixed output and a simple indicator, we began exploring how a microcontroller could be used to control additional functions within the same enclosure.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{fig2.4.jpeg}
+    \caption{LED indicator, touch sensor, and ESP-01S circuit integration.}
+    \label{fig:led_touch_esp01}
+\end{figure}
+
+
+\subsection{Third Attempt: Replacing the 7805 with Two HW-668 Buck Converters}
+
+During the development of the previous circuit, we realised that the 7805 linear voltage regulator was not particularly efficient for our intended application. Since a linear regulator dissipates the excess voltage as heat, its efficiency can become relatively low when the input voltage is considerably higher than the regulated output voltage.
+
+We therefore decided to replace the 7805 with two separate HW-668 buck converter modules. Instead of using a single adjustable converter to generate both output voltages, we dedicated one module to the 5 V output and the other to the 12 V output. Each module was configured to provide its respective voltage independently.
+
+\begin{itemize}
+
+    \item \textbf{Separate Voltage Regulation:}
+    We used one HW-668 buck converter configured for a regulated 5 V output and a second HW-668 buck converter configured for a regulated 12 V output. Both converters received power from the power supply section, and each provided its own regulated DC output. This arrangement allowed us to maintain separate 5 V and 12 V supply lines within the same charger circuit.
+
+    \item \textbf{Introduction of Dual Output:}
+    With the two converters providing their respective voltages, we introduced a relay to select which output would be connected to the charger's output port. The relay was used to switch between the 5 V supply from the first converter and the 12 V supply from the second converter. Thus, the output voltage was selected by switching between two separately regulated sources rather than by changing the voltage setting of a single converter.
+
+    \item \textbf{Circuit Redesign:}
+    Since the power supply architecture had changed substantially, we decided to redesign the circuit rather than continue modifying the previous PCB. We planned the connections for both HW-668 modules, the relay, the microcontroller, and the output port together. This helped us organise the two voltage supply paths and incorporate the output-selection feature into the circuit.
+
+    \item \textbf{Outcome:}
+    This was a major change in the direction of the project. We moved from a basic 5 V charger towards a dual-output charger capable of providing either 5 V or 12 V through a selectable output. Using two dedicated buck converters also allowed us to keep the regulation of the two voltage levels separate while using a common control system for output selection.
+
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{fig2.6.jpeg}
+    \caption{Comparison of the 7805 linear regulator with the two HW-668 buck converter modules used for the regulated 5 V and 12 V outputs.}
+    \label{fig:regulator_buck_comparison}
+\end{figure}
+
+%\begin{figure}[H]
+%    \centering
+%    \includegraphics[width=0.8\textwidth]{fig2.7.jpeg}
+%    \caption{Dual-output charger schematic showing separate HW-668 buck converters for 5 V and 12 V, with relay-based output selection.}
+ %   \label{fig:dual_output_schematic}
+%\end{figure}
+
+\subsection{Dual-Output Charger with ESP32 and OLED Interface}
+
+For the next iteration, we decided to develop a more complete user interface for selecting the output voltage. We added seven components to the original circuit while removing the 7805 regulator. The revised design consisted of two touch sensors, an OLED display, two buck converters configured for 5 V and 12 V, a relay, and an ESP32 microcontroller.
+
+\begin{itemize}
+    \item \textbf{Component Integration:} The two buck converters were intended to provide the two regulated output voltages, while the relay controlled which output was connected to the selected USB port. The ESP32 handled the user inputs and switching logic, and the OLED was intended to display the available options and system messages.
+
+    \item \textbf{Menu Design:} We planned a menu with the heading ``Select output:'' and two options, 5 V and 12 V. The currently active output would be indicated by an ON status, while an arrow would indicate the option selected by the user.
+
+    The two touch sensors were assigned separate functions. One sensor would move the cursor between the available options, while the other would confirm the selection.
+
+    \item \textbf{Confirmation and Error Messages:} We also included additional logic to make the selection process more intuitive. When the user selected an output different from the one currently active, the system would display a confirmation message asking whether the output should be changed, with YES and NO options. If the user selected the output that was already active, the display would show an ``This option is already in use'' message for approximately 1.5 seconds before returning to the main menu.
+
+    \item \textbf{Simulation and Testing:} We implemented the menu and switching logic in the ESP32 code and tested it using Wokwi. The simulations worked as expected, including cursor movement, array-based option selection, confirmation messages, and OLED display updates. This allowed us to verify much of the control logic before attempting to integrate everything physically.
+
+    \item \textbf{Challenges Encountered:} When we connected the OLED display in the physical circuit, it did not work as expected, despite the successful simulation. We considered several possible causes, including a potentially faulty display or problems with the physical connections. However, with limited time remaining, we could not fully troubleshoot the issue and identify the exact cause.
+
+    \item \textbf{Outcome:} Since the control logic was already working in simulation, we decided to retain the ESP32-based switching system but replace the OLED interface with a more practical alternative.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{fig2.7.jpeg}
+    \caption{Simulated output-selection menu.}
+    \label{fig:simulated_menu}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{fig2.8.jpeg}
+    \caption{Simulated confirmation screen.}
+    \label{fig:simulated_confirmation}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{fig2.9.jpeg}
+    \caption{Simulated ``already in use'' message.}
+    \label{fig:simulated_already_in_use}
+\end{figure}
+
+% \begin{figure}[H]
+%    \centering
+%    \includegraphics[width=0.8\textwidth]{fig2.1.jpg}
+%    \caption{Physical OLED connections during testing.}
+%    \label{fig:physical_oled}
+% \end{figure}
+
+
+\subsection{ESP32 Webserver-Based Output Selection}
+
+After the OLED display failed to work in the physical circuit, we decided to use the ESP32's built-in Wi-Fi capabilities to provide the user interface through a webserver. This allowed us to retain the output-selection functionality without depending on a separate display module.
+
+\begin{itemize}
+    \item \textbf{Webserver Implementation:} We modified the ESP32 code to host a webserver that could be accessed from a phone. The web interface would allow the user to select between the 5 V and 12 V outputs, while the ESP32 would handle the corresponding relay control.
+
+    \item \textbf{Physical Testing and Debugging:} After implementing the webserver, we tested the circuit again. Initially, the output switching still did not work as expected. We then measured the voltages across the terminals involved in the switching arrangement to trace the problem.
+
+    \item \textbf{Problem Identification:} During these measurements, we realised that the switching circuit had been connected to the buck converter's USB port, which was not providing the expected connection for our arrangement. We then moved the connection to the other USB port provided on the buck converter. After making this change, the circuit began working as intended.
+
+    \item \textbf{Outcome:} This was an important debugging step because the issue was not with the webserver code itself, but with the physical connections in the power supply and switching circuit. We understood that a simulation can verify the intended logic, but the actual circuit still needs to be checked carefully at the electrical level.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{fig2.10.jpeg}
+    \caption{Webserver interface accessed through a phone.}
+    \label{fig:webserver_interface}
+\end{figure}
+
+% \begin{figure}[H]
+%    \centering
+%    \includegraphics[width=0.8\textwidth]{fig2.1.jpg}
+%    \caption{Updated circuit schematic with the corrected buck converter connections.}
+%    \label{fig:corrected_circuit}
+% \end{figure}
+
+
+\subsection{Final Integration and 3D Enclosure Design}
+
+After resolving the switching issue, we were finally able to operate the charger with selectable 5 V and 12 V outputs through the webserver hosted by the ESP32. With the main circuit and control logic working, we moved towards integrating the components into a proper enclosure.
+
+\begin{itemize}
+    \item \textbf{Circuit Integration:} We brought together the transformer, two buck converters, relay, ESP32, touch sensors, and associated circuitry into the final circuit arrangement. We checked the connections and verified that the web interface could be used to switch between the two outputs.
+
+    \item \textbf{3D Modelling:} We then returned to the mechanical design, this time with a clearer understanding of the actual circuit dimensions and component placement. We used OpenSCAD to design an enclosure that could accommodate the transformer, PCB, buck converters, and other components without requiring the complicated automated door mechanism of our initial design.
+
+    \item \textbf{Design Considerations:} We tried to make efficient use of the available space and keep the enclosure as compact as possible, while leaving sufficient room for the internal components and their connections. Our aim was to make the final assembly resemble a conventional mobile charger more closely, rather than a circuit mounted inside a large prototype case.
+
+    \item \textbf{Outcome:} This stage brought the electrical and mechanical parts of the project together. We were able to move from a working circuit with exposed components towards a more organised product design.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{fig2.11.jpeg}
+    \caption{Final 3D enclosure model, front view.}
+    \label{fig:final_model_front}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{fig2.12.jpeg}
+    \caption{Final 3D enclosure model, back view.}
+    \label{fig:final_model_back}
+\end{figure}
+
+
+\subsection{Final Testing, Documentation, and Project Takeaways}
+
+In the final stage, we concentrated on checking the circuit and enclosure design before completing the project documentation. We reviewed the connections, verified the output-selection functionality, and checked the 3D model to ensure that the components could be accommodated within the enclosure.
+
+\vspace{0.5em}
+
+\begin{itemize}
+    \item \textbf{Final Verification:} We tested the switching operation through the ESP32 webserver and verified that the charger could switch between the 5 V and 12 V outputs. We also reviewed the circuit schematic and the 3D model to make sure that the final documentation represented the design we had developed.
+
+    \item \textbf{Project Documentation:} Once the final circuit and enclosure design were ready, we uploaded the ESP32 code and the STL files for the 3D model to our GitHub repository. This gave us a common place to maintain the final project files and preserve the work completed during the different iterations.
+
+    \item \textbf{Final Third-Attempt Struggle:} During the final stage of the third attempt, we encountered one more important problem with the output-selection system. Although the ESP32 webserver was functioning correctly, the relay was not reliably activating from the ESP32's 3.3 V GPIO output. We therefore had to modify the switching arrangement so that the relay received a higher effective control voltage. For our final prototype, an AAA battery was used to add approximately 1.6 V to the existing 3.3 V control level, giving an effective voltage of approximately 4.9 V at the relay input. This finally allowed the relay to operate reliably and made the webserver-based output selection functional in the physical circuit.
+
+    \item \textbf{Final Takeaways:} Throughout the project, our initial idea changed considerably, from an automated cable-storage compartment to a charger with selectable output voltages controlled through a web interface. We encountered problems with component availability, circuit connections, damaged capacitors, the OLED display, the relay switching, and the mechanical design. Each of these required us to reconsider our approach and test alternative solutions.
+\end{itemize}
+
+\vspace{0.5em}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{fig2.13.jpeg}
+    \caption{Measured 12 V output from the final charger.}
+    \label{fig:final_12v_output}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{fig2.14.jpeg}
+    \caption{Measured 5 V output from the final charger.}
+    \label{fig:final_5v_output}
+\end{figure}
+
+The final prototype successfully demonstrated selectable 12 V and 5 V outputs through the ESP32 webserver. The project was documented throughout its different iterations, including the mechanical redesign, circuit modifications, software development, physical debugging, and final testing.
+
+\vspace{0.5em}
+
+The complete project demonstration is available at:
+
+\href{https://youtu.be/maL0mV_EwVA}{https://youtu.be/maL0mV_EwVA}
+
+\vspace{0.5em}
+
+One of the main things we understood was that developing a working product involves much more than getting the circuit to function in simulation. Component selection, physical connections, debugging, PCB layout, enclosure dimensions, and the available construction time all have to be considered together. Although we did not end up with the automated enclosure we had originally planned, the final project gave us practical experience in circuit development, embedded programming, simulation, troubleshooting, and 3D modelling.
+
+\vspace{0.5em}
+
+Looking back, the evolution of the project---from the first automated-lid concept to the final dual-output charger---was a valuable learning experience for both of us. The different attempts, including the ones we had to abandon, helped us understand how an engineering project develops through testing, mistakes, and successive improvements.
+
+\end{document}
