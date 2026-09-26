@@ -1,4 +1,4 @@
-
+$fn = 64;
 //Main back wall
 
 translate([0,0,106])
