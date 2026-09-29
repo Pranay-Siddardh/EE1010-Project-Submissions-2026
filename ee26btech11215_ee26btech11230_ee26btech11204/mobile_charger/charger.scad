@@ -28,7 +28,8 @@ module hole_tab(){
         }
     }
 }
-
+translate([0,0,20])
+rotate([0,-90,0])
 union(){
 
 translate([-20,0,0])
