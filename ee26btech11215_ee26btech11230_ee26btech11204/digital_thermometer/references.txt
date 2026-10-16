@@ -1,0 +1,112 @@
+REFERENCES.TXT
+PT100 THERMOMETER PROJECT
+========================================
+
+1. PT100 TEMPERATURE SENSOR — PRINCIPLE AND DOCUMENTATION
+
+   Description:
+   Reference material for the PT100 resistance-temperature relationship, platinum RTD characteristics, nominal resistance, and temperature measurement principles.
+
+   IEC 60751 — Industrial platinum resistance thermometers and platinum temperature sensors:
+   https://webstore.iec.ch/
+
+   DFRobot PT100 Sensor Library and Documentation:
+   https://github.com/DFRobot/DFRobot_PT100
+
+   PT100 Project Repository — G. V. V. Sharma:
+   https://github.com/gadepall/pt100
+
+
+2. POTENTIOMETER — PINOUT AND WORKING PRINCIPLE
+
+   Description:
+   A potentiometer is a three-terminal variable resistor. Its two outer terminals connect across a supply and ground, while the wiper provides an adjustable voltage. In this project, the potentiometer is used to adjust the LCD contrast.
+
+   Arduino LCD Tutorial — Potentiometer wiring:
+   https://docs.arduino.cc/learn/electronics/lcd-displays/
+
+   Arduino LiquidCrystal Library Example:
+   https://github.com/arduino-libraries/LiquidCrystal/blob/master/examples/HelloWorld/HelloWorld.ino
+
+
+3. 16-PIN, 16×2 CHARACTER LCD — PINOUT AND ARDUINO INTERFACING
+
+   Description:
+   Reference for the 16-pin character LCD interface, including VSS, VDD, VO, RS, R/W, Enable, data pins D0–D7, backlight connections, and 4-bit communication with Arduino.
+
+   Arduino Official LCD Display Tutorial:
+   https://docs.arduino.cc/learn/electronics/lcd-displays/
+
+   Arduino LiquidCrystal Library:
+   https://github.com/arduino-libraries/LiquidCrystal
+
+   Note:
+   The LCD used in this project is a 16×2 character display. The pinout should be checked against the actual LCD module datasheet.
+
+
+4. ARDUINO UNO R3 — OFFICIAL PINOUT AND DATASHEET
+
+   Description:
+   Reference for the Arduino Uno R3 pin configuration, analog input pins, digital I/O, power pins, AREF, and microcontroller specifications.
+
+   Official Arduino Uno R3 Datasheet (PDF):
+   https://docs.arduino.cc/resources/datasheets/A000066-datasheet.pdf
+
+   Official Arduino Uno R3 Documentation:
+   https://docs.arduino.cc/hardware/uno-rev3/
+
+
+5. ANALOG-TO-DIGITAL CONVERSION (ADC) AND ANALOG REFERENCE VOLTAGE
+
+   Description:
+   Reference for converting an analog input voltage into a digital ADC reading, ADC resolution, analogRead(), and the role of the reference voltage in voltage calculations.
+
+   Arduino analogRead() Reference:
+   https://docs.arduino.cc/language-reference/en/functions/analog-io/analogRead/
+
+   Arduino analogReference() Reference:
+   https://docs.arduino.cc/language-reference/en/functions/analog-io/analogReference/
+
+   Arduino Uno R3 Datasheet:
+   https://docs.arduino.cc/resources/datasheets/A000066-datasheet.pdf
+
+
+6. NUMPY POLYFIT — QUADRATIC LEAST-SQUARES CALIBRATION
+
+   Description:
+   NumPy documentation for polynomial fitting using least squares. The project uses a second-degree polynomial to approximate the relationship between measured voltage and temperature:
+
+       T = aV² + bV + c
+
+   The coefficients a, b, and c are obtained from experimental voltage-temperature data using a quadratic polynomial fit.
+
+   NumPy polyfit Documentation:
+   https://numpy.org/doc/stable/reference/generated/numpy.polyfit.html
+
+   NumPy Polynomial Fitting Documentation:
+   https://numpy.org/doc/stable/reference/generated/numpy.polynomial.polynomial.polyfit.html
+
+
+7. PROJECT GUIDE — PROF. G. V. V. SHARMA
+
+   Description:
+   Project reference material and supporting documentation associated with Prof. G. V. V. Sharma, Department of Electrical Engineering, IIT Hyderabad.
+
+   Faculty Profile:
+   https://www.iith.ac.in/people/faculty/
+
+   PT100 Project Repository:
+   https://github.com/gadepall/pt100
+
+   Note:
+   Add the direct PDF link for the specific PT100 thermometer project guide here once verified. The repository link is included above, but the exact guide PDF has not been independently identified.
+
+
+8. PROJECT SOURCE CODE
+
+The source codes(.cpp/.ino) are obtained with the help of the ai chatgpt including the numpy calibration code(.py) 
+https://www.chatgpt.com
+
+========================================
+END OF REFERENCES
+========================================
