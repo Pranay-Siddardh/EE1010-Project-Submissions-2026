@@ -247,6 +247,9 @@ against our hardware.
 Our first objective was to establish wireless motor
 control using an ESP32 DevKit.
 
+\paragraph{Power Supply and Distribution.}
+The ESP32 Bluetooth-controlled UGV was powered using a two-cell lithium-ion battery pack with an operating voltage ranging from \(7.4\,\mathrm{V}\) to \(8.4\,\mathrm{V}\). An LM2596 DC--DC buck converter was used to step down the battery voltage to a regulated \(5\,\mathrm{V}\) supply. This regulated output powered the logic supply (VCC1, pin 16) of the L293D motor driver and the ESP32 development board through its designated \(5\,\mathrm{V}\) input. Meanwhile, the battery voltage was connected directly to the motor supply input (VCC2, pin 8) of the L293D to provide the required power for the DC motors. The grounds of the battery, buck converter, ESP32, and L293D were connected together to establish a common electrical reference for the control signals.
+
 We selected the Dabble mobile application because it
 provides a Gamepad interface that communicates with
 the ESP32 through Bluetooth.
