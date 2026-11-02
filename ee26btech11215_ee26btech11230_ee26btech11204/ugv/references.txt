@@ -1,0 +1,122 @@
+REFERENCES
+==========
+
+1. PROJECT CIRCUIT DIAGRAMS
+---------------------------
+
+[1] ESP32 Bluetooth-Controlled UGV – Circuit Diagram
+    https://app.cirkitdesigner.com/project/77bb9468-2125-4b6d-bb11-cdf86b1c76d2
+
+[2] Raspberry Pi Pico W Wi-Fi-Controlled UGV – Circuit Diagram
+    https://app.cirkitdesigner.com/project/8634cb3d-05e7-47cd-89a1-715ecb20721b
+
+[3] ESP32-CAM UGV – Circuit Diagram
+    https://app.cirkitdesigner.com/project/1818aafd-fd66-4861-99ec-7fd3e9db77a6
+
+
+2. PROJECT DEMONSTRATIONS
+-------------------------
+
+[4] ESP32 Bluetooth-Controlled UGV – Demonstration
+    https://youtube.com/shorts/E_w3tyV0lKo?feature=share
+
+[5] Raspberry Pi Pico W Wi-Fi-Controlled UGV – Demonstration
+    https://www.youtube.com/watch?v=DtV5GhC6SQU
+
+
+3. MICROCONTROLLER DOCUMENTATION
+--------------------------------
+
+[6] Espressif Systems – ESP32 Technical Reference Manual
+    https://www.espressif.com/en/support/download/documents
+
+[7] Espressif Systems – ESP32 Datasheet
+    https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf
+
+[8] Espressif Systems – ESP32-WROVER Module Documentation
+    https://www.espressif.com/en/support/download/documents
+
+[9] Raspberry Pi – Raspberry Pi Pico W Documentation
+    https://www.raspberrypi.com/documentation/microcontrollers/raspberry-pi-pico.html
+
+[10] Raspberry Pi – Pico W Datasheet
+     https://datasheets.raspberrypi.com/picow/pico-w-datasheet.pdf
+
+
+4. MOTOR DRIVER AND DC MOTOR CONTROL
+-------------------------------------
+
+[11] Texas Instruments – L293D Quadruple Half-H Driver Datasheet
+     https://www.ti.com/lit/ds/symlink/l293d.pdf
+
+[12] Texas Instruments – L293D Product Information
+     https://www.ti.com/product/L293D
+
+
+5. BLUETOOTH CONTROL
+--------------------
+
+[13] STEMpedia – Dabble Documentation
+     https://thestempedia.com/docs/dabble/
+
+[14] STEMpedia – Dabble Library
+     https://github.com/STEMpedia/Dabble
+
+
+6. WI-FI AND HTTP COMMUNICATION
+-------------------------------
+
+[15] Raspberry Pi Pico W – Wireless Networking Documentation
+     https://www.raspberrypi.com/documentation/microcontrollers/raspberry-pi-pico.html
+
+[16] Espressif Systems – ESP32 Wi-Fi Documentation
+     https://docs.espressif.com/projects/esp-idf/en/stable/esp32/api-guides/wifi.html
+
+[17] IETF – RFC 9110: HTTP Semantics
+     https://www.rfc-editor.org/rfc/rfc9110
+
+
+7. ESP32-CAM AND CAMERA SYSTEM
+------------------------------
+
+[18] Espressif Systems – ESP32 Camera Driver
+     https://github.com/espressif/esp32-camera
+
+[19] Espressif Systems – ESP32 Camera Examples
+     https://github.com/espressif/esp-iot-solution
+
+
+8. DIFFERENTIAL DRIVE AND MOBILE ROBOT MOTION
+----------------------------------------------
+
+[20] ROS – Differential Drive Controller Documentation
+     https://control.ros.org/
+
+[21] Peter Corke – Robotics Toolbox
+     https://petercorke.github.io/robotics-toolbox-python/
+
+
+9. WIRELESS MULTI-NODE NETWORKING – BACKGROUND
+----------------------------------------------
+
+[22] IETF – RFC 3561: Ad hoc On-Demand Distance Vector (AODV) Routing
+     https://www.rfc-editor.org/rfc/rfc3561
+
+[23] IETF – RFC 6550: RPL IPv6 Routing Protocol for Low-Power
+     and Lossy Networks
+     https://www.rfc-editor.org/rfc/rfc6550
+
+
+10. AI-ASSISTED DEVELOPMENT
+---------------------------
+
+[24] OpenAI – ChatGPT
+     https://chatgpt.com/
+
+     Chat Links:- 
+     For Latex Making.
+     1) https://chatgpt.com/share/6ae8c5ca-f398-83ee-85f5-d333113cde8a
+     2) https://chatgpt.com/share/6ae8c61a-a7a8-83ee-ae65-d250dca0fb70
+
+	Source Code Obtainment and partial node research.
+     1) https://chatgpt.com/share/6ae8c628-7a48-83ee-9782-c94c08d336ea
