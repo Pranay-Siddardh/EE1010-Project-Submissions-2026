@@ -56,12 +56,7 @@ UGV-Project/
 │   ├── Pico_W_WiFi_UGV
 │   └── ESP32_CAM_UGV
 │
-├── Source_Code/
-│   ├── ESP32_Bluetooth/
-│   ├── Pico_W_WiFi/
-│   └── ESP32_CAM/
-│
-└── Demonstrations/
+└── Source_Code/
     ├── ESP32_Bluetooth/
     └── Pico_W_WiFi/
 ```
