@@ -279,6 +279,14 @@ assembly and testing.
     This was resolved by reworking and resoldering
     the affected connections.
 
+    \item \textbf{Left and Right Turning Calibration.}
+	During the initial testing of the Bluetooth-controlled UGV, difficulties were encountered 
+	in achieving consistent left and right turning movements. The two DC gear motors exhibited 
+	differences in their rotational response, and their physical orientations required appropriate 
+	direction mapping in the firmware. Consequently, the initial turning commands did not always 
+	produce the intended movement. This was addressed by applying suitable speed trimming to 
+	improve the coordination between the two motors and obtain more predictable turning behaviour.
+
     \item \textbf{Loose jumper-wire connections:}
     Several connections were not sufficiently secure,
     causing intermittent contact. This remained a
@@ -310,8 +318,6 @@ Using Dabble (Section~\ref*{model:bluetooth})}.
 % -------------------------------------------------
 % DAY 2
 % -------------------------------------------------
-
-\newpage
 
 \subsection{Day 2: Local Wi-Fi Joystick Control (Main Project)}
 
@@ -408,6 +414,16 @@ high-frequency joystick streams will have identical
 response performance.
 
 
+\subsubsection{Continuous Joystick Control and Motor Calibration.}
+Unlike the Bluetooth button-based implementation, the Wi-Fi-controlled UGV uses a 
+continuous joystick interface, where the horizontal and vertical joystick coordinates 
+are continuously translated into individual motor commands. During testing, it was observed 
+that additional motor speed trimming was not necessary for the joystick-based implementation,
+as the continuous variation of the motor commands provided smoother control over the rover's 
+movement and turning behaviour. This made the control response more consistent during 
+directional transitions without requiring the manual speed-trimming adjustments used in the 
+Bluetooth model.
+
 \subsubsection{Joystick control and stopping behaviour}
 
 The browser interface provides proportional control
@@ -481,8 +497,6 @@ Control Using Raspberry Pi Pico W
 % DAY 3
 % -------------------------------------------------
 
-\newpage
-
 Before the Day 3 implementation log, it is worth noting that the ESP32-CAM model was developed almost entirely at the theoretical and design level, including its system architecture, circuit connections, and proposed Wi-Fi-based camera functionality. However, due to component constraints, we were unable to produce the physical model or demonstrate its operation. The theoretical development and implementation plan were completed, providing a foundation for its future physical realization.
 
 \subsection{Day 3: ESP32-CAM Campus Camera Rover}
@@ -550,8 +564,6 @@ Camera Rover (Section~\ref*{model:camera})}.
 % #################################################
 % SECTION 2: PROJECT MODELS
 % #################################################
-
-\newpage
 
 \section{Project Models}
 \label{sec:project-models}
@@ -672,42 +684,6 @@ for differences in motor response.
     \label{fig:bluetooth-circuit}
 \end{figure}
 
-
-\subsubsection{Differential-drive control}
-
-The rover uses a differential-drive arrangement.
-The two motors can be controlled independently,
-allowing the vehicle to move forward, reverse,
-or turn.
-
-The firmware combines the horizontal and vertical
-control requests using:
-
-\[
-L_{\mathrm{raw}}=y+x
-\]
-
-\[
-R_{\mathrm{raw}}=y-x
-\]
-
-Here, \(L_{\mathrm{raw}}\) and \(R_{\mathrm{raw}}\)
-represent the left and right motor requests before
-normalisation.
-
-For forward motion, both motors receive commands
-in the forward direction. For reverse motion,
-both receive reverse commands.
-
-When a steering input is combined with forward
-or reverse movement, the two motor commands become
-different, producing a turning motion.
-
-If either calculated value exceeds the allowed
-range, the firmware normalises the pair to keep
-the motor commands within the permitted limits.
-
-
 \subsubsection{PWM speed control}
 
 The firmware uses PWM to control the effective
@@ -771,15 +747,12 @@ inputs to control the two motors.
 
 The implementation introduced the basic control
 functions required by the later models: direction
-selection, differential-drive calculation, PWM
-speed control, and motor inversion.
+selection, PWM speed control, and motor inversion.
 
 
 % =================================================
 % MODEL 2: LOCAL WI-FI
 % =================================================
-
-\newpage
 
 \subsection{Model 2: Local Wi-Fi Joystick Control Using Raspberry Pi Pico W}
 \label{model:wifi}
@@ -1224,8 +1197,6 @@ from this report.
 % MODEL 3: ESP32-CAM
 % =================================================
 
-\newpage
-
 \subsection{Model 3: ESP32-CAM Campus Camera Rover}
 \label{model:camera}
 
@@ -1387,8 +1358,6 @@ No demonstration video is included because a successful camera-streaming demonst
 % RESEARCH MODELS
 % =================================================
 
-\newpage
-
 \subsection{Research Models}
 \label{sec:research-models}
 
@@ -1540,8 +1509,6 @@ of the wireless control system.
 % =================================================
 % CONCLUSION
 % =================================================
-
-\newpage
 
 \section{Conclusion}
 
