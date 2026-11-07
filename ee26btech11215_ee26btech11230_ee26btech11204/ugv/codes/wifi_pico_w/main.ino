@@ -34,7 +34,7 @@ const bool RIGHT_MOTOR_INVERTED = true;
 
 const float DEADZONE = 0.05f;
 
-const int MIN_PWM = 60;
+const int MIN_PWM = 110;
 const int MAX_PWM = 255;
 
 const unsigned long WATCHDOG_MS = 250;
@@ -102,7 +102,7 @@ void stopMotors() {
 }
 
 // =====================================================
-//          MINIMUM PWM MAPPING: 60 TO 255
+//          MINIMUM PWM MAPPING: 110 TO 255
 // =====================================================
 
 int magnitudeToPWM(float magnitude) {
